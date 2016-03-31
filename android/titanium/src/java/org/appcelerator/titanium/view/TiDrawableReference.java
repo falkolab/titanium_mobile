@@ -132,7 +132,7 @@ public class TiDrawableReference
 		return (this.hashCode() == ((TiDrawableReference)object).hashCode());
 	}
 
-	public static TiDrawableReference fromResourceId(Activity activity, int resourceId) 
+	public static TiDrawableReference fromResourceId(Activity activity, int resourceId)
 	{
 		TiDrawableReference ref = new TiDrawableReference(activity, DrawableReferenceType.RESOURCE_ID);
 		ref.resourceId = resourceId;
@@ -204,7 +204,7 @@ public class TiDrawableReference
 		ref.file = file;
 		return ref;
 	}
-	
+
 	public static TiDrawableReference fromDictionary(Activity activity, HashMap dict)
 	{
 		if (dict.containsKey("media")) {
@@ -227,7 +227,7 @@ public class TiDrawableReference
 		if (object == null) {
 			return new TiDrawableReference(activity, DrawableReferenceType.NULL);
 		}
-		
+
 		if (object instanceof String) {
 			return fromUrl(activity, TiConvert.toString(object));
 		} else if (object instanceof HashMap) {
@@ -259,7 +259,7 @@ public class TiDrawableReference
 	{
 		return type == DrawableReferenceType.FILE;
 	}
-	
+
 	public boolean isTypeBlob()
 	{
 		return type == DrawableReferenceType.BLOB;
@@ -299,7 +299,7 @@ public class TiDrawableReference
 	{
 		return getBitmap(needRetry, false);
 	}
-	
+
 	/**
 	 * Gets the bitmap from the resource. If densityScaled is set to true, image is scaled
 	 * based on the device density otherwise no sampling/scaling is done.
@@ -490,7 +490,7 @@ public class TiDrawableReference
 		}
 		return drawable;
 	}
-	
+
 	/**
 	 * Gets a scaled resource drawable directly if the reference is to a resource, else
 	 * makes a BitmapDrawable with default attributes. Scaling is done based on the device
@@ -784,7 +784,7 @@ public class TiDrawableReference
 		if (!isNetworkUrl()) {
 			Log.w(TAG, "getBitmapAsync called on non-network url.  Will attempt load.", Log.DEBUG_MODE);
 		}
-		
+
 		try {
 			TiDownloadManager.getInstance().download(new URI(TiUrl.getCleanUri(url).toString()), listener);
 		} catch (URISyntaxException e) {
@@ -836,7 +836,7 @@ public class TiDrawableReference
 
 	/**
 	 * Based on the underlying type of reference this is, figures out how to get
-	 * an InputStream for it.  E.g., if a blob, calls blob.getInputStream, if 
+	 * an InputStream for it.  E.g., if a blob, calls blob.getInputStream, if
 	 * a resource id, calls context.getTiApp().getResources().openRawResource(resourceId).
 	 * @return InputStream or null if problem getting it (check logcat in that case)
 	 */
@@ -847,7 +847,7 @@ public class TiDrawableReference
 		if (isTypeUrl() && url != null) {
 			try {
 				stream = TiFileHelper.getInstance().openInputStream(url, false);
-				
+
 			} catch (IOException e) {
 				Log.e(TAG, "Problem opening stream with url " + url + ": " + e.getMessage(), e);
 			}
@@ -875,7 +875,7 @@ public class TiDrawableReference
 
 	/**
 	 * Calculates a value for the BitmapFactory.Options .inSampleSize property.
-	 * 
+	 *
 	 * @see <a href="http://developer.android.com/reference/android/graphics/BitmapFactory.Options.html#inSampleSize">BitmapFactory.Options.inSampleSize</a>
 	 * @param srcWidth int
 	 * @param srcHeight int
@@ -893,7 +893,7 @@ public class TiDrawableReference
 
 	/**
 	 * Calculates a value for the BitmapFactory.Options .inSampleSize property.
-	 * 
+	 *
 	 * @see <a href="http://developer.android.com/reference/android/graphics/BitmapFactory.Options.html#inSampleSize">BitmapFactory.Options.inSampleSize</a>
 	 * @param srcWidth int
 	 * @param srcHeight int
@@ -903,7 +903,7 @@ public class TiDrawableReference
 	 * is to srcWidth.
 	 * @return max of srcWidth/destWidth or srcHeight/destHeight
 	 */
-	public int calcSampleSize(View parent, int srcWidth, int srcHeight, TiDimension destWidthDimension, TiDimension destHeightDimension) 
+	public int calcSampleSize(View parent, int srcWidth, int srcHeight, TiDimension destWidthDimension, TiDimension destHeightDimension)
 	{
 		int destWidth, destHeight;
 		destWidth = destHeight = TiDrawableReference.UNKNOWN;
