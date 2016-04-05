@@ -170,7 +170,7 @@ public class TiTempFileHelper
 
 				// See http://developer.android.com/guide/topics/data/data-storage.html#ExternalCache
 				// getExternalCacheDir() is available since API 8
-				File externalCacheDir = context.getExternalCacheDir()				
+				File externalCacheDir = context.getExternalCacheDir();
 				tempDir = new File(externalCacheDir, TEMPDIR);
 			} else {
 				// Use internal storage cache if SD card is removed
